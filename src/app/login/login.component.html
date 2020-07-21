@@ -1,0 +1,38 @@
+<h2 class="text-center">Login</h2>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="col-md-6 offset-md-3">
+  <div class="form-group row">
+    <label class="col">
+      Email
+      <input type="email" class="form-control" formControlName="email">
+    </label>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="email.invalid && (email.touched||email.dirty)">
+    <div *ngIf="email.errors.required">
+      Email không được để trống.
+    </div>
+    <div *ngIf="email.errors.email">
+      Email không đúng định dạng.
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col">
+      Password
+      <input type="password" class="form-control" formControlName="password">
+    </label>
+  </div>
+
+  <div class="alert alert-danger" role="alert" *ngIf="password.invalid && (password.touched||password.dirty)">
+    <div *ngIf="password.errors.required">
+      Mật khẩu không được để trống.
+    </div>
+    <div *ngIf="password.errors.minlength">
+      Mat khau toi thieu 6 ki tu.
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-info" type="submit">Submit</button>
+  </div>
+</form>
+<!--<pre>-->
+<!--{{ loginForm.value | json}}-->
+<!--</pre>-->

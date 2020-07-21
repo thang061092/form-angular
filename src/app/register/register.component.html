@@ -1,0 +1,81 @@
+<h2 class="text-center pt-3">Register</h2>
+<form [formGroup]="registerForm" (submit)="onSubmit()">
+  <div class="form-group">
+    <label>Email:</label>
+    <input type="email" class="form-control" formControlName="email">
+  </div>
+  <div class="alert alert-danger" role="alert"
+       *ngIf="registerForm.get('email').invalid && (registerForm.get('email').touched||registerForm.get('email').dirty)">
+    <div *ngIf="registerForm.get('email').errors.required">
+      Email không được để trống.
+    </div>
+    <div *ngIf="registerForm.get('email').errors.email">
+      Email không đúng định dạng.
+    </div>
+  </div>
+  <fieldset formGroupName="pwGroup">
+    <div class="form-group">
+      <label>Password:</label>
+      <input type="text" class="form-control" formControlName="password">
+    </div>
+    <div class="form-group">
+      <label>Confirm Password:</label>
+      <input type="text" class="form-control" formControlName="confirmPassword">
+    </div>
+  </fieldset>
+  <div class="alert alert-danger" role="alert" *ngIf="registerForm.hasError('passwordnotmatch', ['pwGroup']) &&
+      (registerForm.get('pwGroup').touched||registerForm.get('pwGroup').dirty)">
+    Mật khẩu không trùng khớp.
+  </div>
+  <div class="form-group">
+    <label>Country:</label>
+    <select formControlName="country" class="form-control">
+      <option value="vn">Việt Nam</option>
+      <option value="us">US</option>
+    </select>
+  </div>
+  <div class="alert alert-danger" role="alert"
+       *ngIf="registerForm.get('country').invalid && (registerForm.get('country').touched||registerForm.get('country').dirty)">
+    Country không được để trống.
+  </div>
+  <div class="form-group">
+    <label>Age:</label>
+    <input type="number" class="form-control" formControlName="age">
+  </div>
+  <div class="alert alert-danger" role="alert"
+       *ngIf="registerForm.get('age').invalid && (registerForm.get('age').touched||registerForm.get('age').dirty)">
+    <div *ngIf="registerForm.get('age').errors.required">
+      Tuổi không được để trống.
+    </div>
+    <div *ngIf="registerForm.get('age').errors.min">
+      Bạn phải từ 18 tuổi trở lên.
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Gender:</label>
+    <br>
+    <label><input type="radio" class="form-control" formControlName="gender" value="male">Male</label>
+    <label><input type="radio" class="form-control" formControlName="gender" value="female">Female</label>
+  </div>
+  <div class="alert alert-danger" role="alert"
+       *ngIf="registerForm.get('gender').invalid && registerForm.get('gender').touched">
+    Giới tính không được để trống.
+  </div>
+  <div class="form-group">
+    <label>Phone:</label>
+    <input type="tel" class="form-control" formControlName="phone">
+  </div>
+  <div class="alert alert-danger" role="alert"
+       *ngIf="registerForm.get('phone').invalid && (registerForm.get('phone').touched||registerForm.get('phone').dirty)">
+    <div *ngIf="registerForm.get('phone').errors.required">
+      Số điện thoại không được để trống.
+    </div>
+    <div *ngIf="registerForm.get('phone').errors.pattern">
+      Điện thoại phải bắt đầu bằng (+84) theo sau là 9 hoặc 10 chữ số.
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+<pre>
+{{ registerForm.value | json}}
+</pre>
